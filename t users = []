@@ -1,0 +1,23 @@
+[33mcommit ccc880d6ea0bf633cdb413c264b3c06c7981fe4a[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: BauyrjanSeidakhmet <bauke.10.bs@gmail.com>
+Date:   Thu Nov 11 15:30:13 2021 +0600
+
+    added schema
+
+[33mcommit 28520c0e93ce3a87ef63e1f154c9c4f6f96569a4[m
+Author: BauyrjanSeidakhmet <bauke.10.bs@gmail.com>
+Date:   Thu Nov 11 12:37:50 2021 +0600
+
+    connected qraphql
+
+[33mcommit 753bb06b6823b44fe537945f791264ece5bf32b0[m
+Author: BauyrjanSeidakhmet <bauke.10.bs@gmail.com>
+Date:   Thu Nov 11 12:30:31 2021 +0600
+
+    connected express
+
+[33mcommit b01164a2c4077970bb8e0ae5a88c4f4c56325b8e[m
+Author: BauyrjanSeidakhmet <bauke.10.bs@gmail.com>
+Date:   Thu Nov 11 12:18:07 2021 +0600
+
+    initial commit
