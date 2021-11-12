@@ -25,6 +25,7 @@ function App() {
     <div className="App">
         {users.map(user => {
          return <User
+            key = {user.id}
             email = {user.email}
             age = {user.age}
           />
