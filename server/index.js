@@ -1,38 +1,58 @@
 const express = require('express')
 const {graphqlHTTP} = require('express-graphql')
 const cors = require('cors')
+const mongoose = require("mongoose");
 const schema = require('./schema')
-const users = [{id: 1, email: 'Bauka@mail.ru', age: 25}]
+const config = require("./config");
+
+const User = require('./models/User');
 
 const app = express()
-app.use(cors())
-
-const createUser = (input) => {
-    const id = Date.now()
-    return {
-        id, 
-        ...input
-    }
-}
+const port = 5000;
 
 const root = {
-    getAllUsers: () => {
-        return users
+    getAllUsers: async() => {
+        const users = await User.find()
+        return users 
     },
-    getUser: ({id}) => {
-        return users.find(user => user.id == id)
+    getUser: async({id}) => {
+        const user = await User.findById(id)
+        if (user) {
+            return user
+        } else {
+            return ({ message: 'User is not found', statusCode: 404 })
+        }
     },
-    createUser: ({input}) => {  
-        const user = createUser(input)
-        users.push(user)
-        return user
+    createUser: async({input}) => {  
+        const user = new User({
+            ...input
+        })
+        user.generateToken();
+        try {
+            await user.save()
+            return user
+          } catch(err) {
+            console.log(err)
+          }
     }
 }
 
-app.use('/graphql', graphqlHTTP({
-    graphiql: true,
-    schema,
-    rootValue: root
-}))
-
-app.listen(5000, () => console.log('server started on port 5000'))
+const run = async () => {
+    await mongoose.connect(config.getDbUrl(), {useNewUrlParser: true, useUnifiedTopology: true});
+  
+    app.use(cors())
+    app.use(express.json());
+    app.use('/graphql', graphqlHTTP({
+        graphiql: true,
+        schema,
+        rootValue: root
+    }))
+      
+  
+  
+    app.listen(port, () => {
+      console.log("Server started at http://localhost:" + port);
+    });
+  };
+  
+  run().catch(e => console.log(e));
