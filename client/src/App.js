@@ -1,36 +1,32 @@
-import { useEffect, useState } from 'react';
-import axios from './axiosApi'
-import './App.css';
-import { GET_USERS_QUERY } from './constants';
-import User from './components/User/User';
+import React from 'react';
+import {Routes, Route} from "react-router-dom";
+import Main from './containers/Main/Main';
+import Register from './containers/Register/Register';
+
+// const ProtectedRoute = ({isAllowed, redirectTo, ...props}) => {
+//   return isAllowed ?
+//       <Route {...props} /> :
+//       <Redirect to={redirectTo}/>
+// };
 
 function App() {
-  const [users, setUsers] = useState([])
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.post('/', {
-          query: GET_USERS_QUERY
-        })
-        setUsers(response.data.data.getAllUsers)
-      } catch(e) {
-        console.log(e);
-      }
-    }
-    fetchUsers()
-  }, [])
 
   return (
-    <div className="App">
-        {users.map(user => {
-         return <User
-            key = {user.id}
-            email = {user.email}
-            age = {user.age}
-          />
-        })}
-    </div>
+    <>
+        <Routes>
+            <Route exact path='/' render={() => <Main/>}/>
+            <Route exact path='/register' render={() => <Register/>}/>
+                  {/* <Route exact path='/register' render={() => <Register/>}/>
+                  <Route exact path='/login' render={() => <Login/>}/>               
+                  <ProtectedRoute
+                        isAllowed={user}
+                        redirectTo={"/login"}
+                        path="/add"
+                        exact
+                        component={AddProduct}
+                  />       */}
+        </Routes>
+    </>
   );
 }
 
