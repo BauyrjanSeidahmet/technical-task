@@ -6,12 +6,16 @@ export const GET_USERS_QUERY = `
     }
 `
 
-export const CREATE_USER = (userData) => {
+export const CREATE_USER = ({email, password, age}) => {
     return `
         mutation {
-            createUser(input: {
-                ${userData}
-            }) {
+            createUser(input: 
+                {
+                    email: "${email}"
+                    password: "${password}"
+                    age: ${age}
+                  }
+            ) {
             email, password, age
             }
         }
