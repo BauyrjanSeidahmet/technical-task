@@ -25,12 +25,12 @@ const UserSchema = Schema({
     age: {
         type: Number,
         required: true
-    },
-    token: {
-        type: String,
-        required: true
-    }
-    });
+    }}, 
+    {writeConcern: {
+      w: 'majority',
+      j: true,
+      wtimeout: 1000
+    }});
 
 UserSchema.pre("save", async function(next) {
   if (!this.isModified("password")) return next();
