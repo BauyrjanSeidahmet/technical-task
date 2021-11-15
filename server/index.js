@@ -2,6 +2,8 @@ const express = require('express')
 const {graphqlHTTP} = require('express-graphql')
 const cors = require('cors')
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
 const schema = require('./schema')
 const config = require("./config");
 
@@ -34,6 +36,24 @@ const root = {
           } catch(err) {
             console.log(err)
           }
+    },
+    login: async({email, password}) => {
+        const user = await User.findOne({ email: email });
+
+        if (!user) {
+            throw new Error('Wrong email or password')
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password)
+
+        if (!isMatch) {
+            throw new Error('Wrong email or password')
+        }
+
+        const token = await jwt.sign({userId: user.id, email: user.email}, 'SomeSecretKey', {expiresIn: '1h'})
+
+        return { userId: user.id, token: token, tokenExpiration: 1 }
+
     }
 }
 

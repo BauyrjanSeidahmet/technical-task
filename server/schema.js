@@ -7,16 +7,22 @@ const schema = buildSchema(`
         password: String
         age: Int
     }
+    type AuthData {
+        userId: ID!
+        token: String!
+        tokenExpiration: Int!
+    }
     input UserInput {
         id: ID
         email: String!
         password: String!
         age: Int!
     }  
-
+  
     type Query {
         getAllUsers: [User]
         getUser(id: ID): User
+        login(email: String!, password: String!): AuthData!
     }
     type Mutation {
         createUser(input: UserInput): User
