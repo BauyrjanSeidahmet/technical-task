@@ -1,7 +1,7 @@
 import axios from "../../axiosApi";
 import {push} from "connected-react-router";
 import { CREATE_USER_FAILURE, CREATE_USER_SUCCESS, LOGIN_USER_SUCCESS, LOGIN_USER_FAILURE, LOGOUT_USER } from "../actionTypes";
-import { CREATE_USER } from "../../constants";
+import { CREATE_USER, LOGIN_USER } from "../../constants";
 
 const createUserSuccess = user => {
     return {type: CREATE_USER_SUCCESS, user};
@@ -38,8 +38,10 @@ const loginUserFailure = error => {
 export const loginUser = userData => {
     return async dispatch => {
         try {
-            const response = await axios.post("/users/sessions", userData);
-            dispatch(loginUserSuccess(response.data))
+            const response = await axios.post("/", {
+                query: LOGIN_USER(userData)
+            });
+            dispatch(loginUserSuccess(response.data.data.login))
             dispatch(push("/"));
         } catch(error) {
             dispatch(loginUserFailure(error));

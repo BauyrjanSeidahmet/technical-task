@@ -21,3 +21,14 @@ export const CREATE_USER = ({email, password, age}) => {
         }
     `
 }
+
+export const LOGIN_USER = ({email, password}) => {
+    return `
+        query {
+            login(email: "${email}", password: "${password}") {
+            userId
+            token
+            }
+        }
+    `
+}
