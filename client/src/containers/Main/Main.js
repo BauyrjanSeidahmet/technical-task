@@ -1,28 +1,19 @@
-import { useEffect, useState } from 'react';
-import axios from '../../axiosApi'
-import { GET_USERS_QUERY } from '../../constants';
+import { useEffect } from 'react';
 import User from '../../components/User/User';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUsers } from '../../store/actions/usersActions';
 
 const Main = () => {
-  const [users, setUsers] = useState([])
+  const users = useSelector(state => state.users.users);
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.post('/', {
-          query: GET_USERS_QUERY
-        })
-        setUsers(response.data.data.getAllUsers)
-      } catch(e) {
-        console.log(e);
-      }
-    }
-    fetchUsers()
+    dispatch(fetchUsers())
   }, [])
 
   return (
     <div className="Main">
-        {users.map(user => {
+        {users?.map(user => {
          return <User
             key = {user.id}
             email = {user.email}
