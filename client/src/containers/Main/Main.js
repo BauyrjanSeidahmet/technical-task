@@ -13,7 +13,7 @@ const Main = () => {
 
   useEffect(() => {
     dispatch(fetchUsers())
-  }, [])
+  }, [dispatch])
 
   const OnChangeInput = (e) => {
     setUserId(e.target.value)
