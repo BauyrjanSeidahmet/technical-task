@@ -6,6 +6,7 @@ export default function FullWidthTextField({OnChangeInput}) {
 
   return (
     <Box
+      mr={4}
       sx={{
         width: 500,
         maxWidth: '100%',

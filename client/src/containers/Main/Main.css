@@ -1,13 +1,9 @@
 .Main {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .search {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn {
-    margin-left: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

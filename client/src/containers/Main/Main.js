@@ -29,7 +29,7 @@ const Main = () => {
         <FullWidthTextField
           OnChangeInput={OnChangeInput}
         />
-      <Button className="btn" variant="contained" onClick={OnClickBtn}>Search</Button>
+      <Button variant="contained" onClick={OnClickBtn}>Search</Button>
       </div>
       {
         searchedUser ? 
