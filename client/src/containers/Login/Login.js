@@ -5,6 +5,7 @@ import FormElement from "../../components/UI/Form/FormElement/FormElement";
 import UserForm from "../../components/UserForm/UserForm";
 import {Alert, AlertTitle} from "@material-ui/lab";
 import {makeStyles} from "@material-ui/core/styles";
+import {useNavigate} from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
     alert: {
@@ -17,6 +18,7 @@ const Login = () => {
     const classes = useStyles()
     const dispatch = useDispatch();
     const error = useSelector(state => state.users.loginError);
+    const navigate = useNavigate();
 
     const [state, setState] = useState({
         email: "",
@@ -32,7 +34,7 @@ const Login = () => {
 
     const submitFormHandler = async e => {
         e.preventDefault();
-        await dispatch(loginUser({...state}));
+        await dispatch(loginUser({...state}, navigate));
     };
     return (
         <UserForm

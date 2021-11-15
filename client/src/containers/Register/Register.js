@@ -3,11 +3,12 @@ import {useSelector, useDispatch} from "react-redux";
 import FormElement from "../../components/UI/Form/FormElement/FormElement";
 import UserForm from "../../components/UserForm/UserForm";
 import { createUser } from '../../store/actions/usersActions';
-
+import {useNavigate} from 'react-router-dom';
 
 const Register = () => {
     const dispatch = useDispatch();
     const error = useSelector(state => state.users.registerError);
+    const navigate = useNavigate();
 
     const [state, setState] = useState({
         email: "",
@@ -24,7 +25,7 @@ const Register = () => {
 
     const submitFormHandler = async e => {
         e.preventDefault();
-        await dispatch(createUser({...state}));
+        await dispatch(createUser({...state}, navigate));
     };
 
     const getFieldError = fieldName => {

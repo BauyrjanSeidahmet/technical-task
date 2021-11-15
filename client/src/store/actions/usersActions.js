@@ -1,5 +1,4 @@
 import axios from "../../axiosApi";
-import {push} from "connected-react-router";
 import { CREATE_USER_FAILURE, CREATE_USER_SUCCESS, LOGIN_USER_SUCCESS, LOGIN_USER_FAILURE, LOGOUT_USER, FETCH_USERS_SUCCESS, FETCH_USERS_FAILURE, FETCH_USER_SUCCESS, FETCH_USER_FAILURE } from "../actionTypes";
 import { CREATE_USER, GET_USER, GET_USERS_QUERY, LOGIN_USER } from "../../constants";
 
@@ -17,7 +16,6 @@ export const fetchUsers = () => {
                 query: GET_USERS_QUERY
             });
             dispatch(fetchUsersSuccess(response.data.data.getAllUsers));
-            dispatch(push("/"));
         } catch(error) {
             if (error.response && error.response.data) {
                 dispatch(fetchUsersFailure(error.response.data));
@@ -43,7 +41,6 @@ export const fetchUser = (id) => {
             });
             console.log('user', response.data.data.getUser)
             dispatch(fetchUserSuccess(response.data.data.getUser));
-            dispatch(push("/"));
         } catch(error) {
             if (error.response && error.response.data) {
                 dispatch(fetchUserFailure(error.response.data));
@@ -61,14 +58,13 @@ const createUserFailure = error => {
     return {type: CREATE_USER_FAILURE, error};
 };
 
-export const createUser = userData => {
+export const createUser = (userData, navigate) => {
     return async dispatch => {
         try {
-            const response = await axios.post("/", {
+            await axios.post("/", {
                 query: CREATE_USER(userData)
             });
-            dispatch(createUserSuccess(response.data));
-            dispatch(push("/"));
+            navigate('/login')
         } catch(error) {
             if (error.response && error.response.data) {
                 dispatch(createUserFailure(error.response.data));
@@ -86,24 +82,17 @@ const loginUserFailure = error => {
     return {type: LOGIN_USER_FAILURE, error};
 };
 
-export const loginUser = userData => {
+export const loginUser = (userData, navigate) => {
     return async dispatch => {
         try {
             const response = await axios.post("/", {
                 query: LOGIN_USER(userData)
             });
             dispatch(loginUserSuccess(response.data.data.login))
-            dispatch(push("/"));
+            navigate('/')
         } catch(error) {
             dispatch(loginUserFailure(error));
         }
     };
 };
 
-export const logoutUser = () => {
-    return async dispatch => {
-      await axios.delete("/users/sessions");
-      dispatch({type: LOGOUT_USER});
-      dispatch(push("/login"));
-    };
-  };

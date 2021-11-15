@@ -29,7 +29,6 @@ const root = {
         const user = new User({
             ...input
         })
-        user.generateToken();
         try {
             await user.save()
             return user
