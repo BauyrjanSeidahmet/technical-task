@@ -27,6 +27,7 @@ export const LOGIN_USER = ({email, password}) => {
         query {
             login(email: "${email}", password: "${password}") {
             userId
+            email
             token
             }
         }

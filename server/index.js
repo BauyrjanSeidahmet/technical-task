@@ -52,7 +52,7 @@ const root = {
 
         const token = await jwt.sign({userId: user.id, email: user.email}, 'SomeSecretKey', {expiresIn: '1h'})
 
-        return { userId: user.id, token: token, tokenExpiration: 1 }
+        return { userId: user.id, email: user.email, token: token, tokenExpiration: 1 }
 
     }
 }
