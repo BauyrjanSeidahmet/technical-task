@@ -12,10 +12,9 @@ import Register from './containers/Register/Register';
 function App() {
 
   return (
-    <>
         <Routes>
-            <Route exact path='/' render={() => <Main/>}/>
-            <Route exact path='/register' render={() => <Register/>}/>
+            <Route path='/' element={<Main/>}/>
+            <Route exact path='/register' element={<Register/>}/>
                   {/* <Route exact path='/register' render={() => <Register/>}/>
                   <Route exact path='/login' render={() => <Login/>}/>               
                   <ProtectedRoute
@@ -26,7 +25,6 @@ function App() {
                         component={AddProduct}
                   />       */}
         </Routes>
-    </>
   );
 }
 

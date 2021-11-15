@@ -22,15 +22,13 @@ const Main = () => {
 
   return (
     <div className="Main">
-        {/* {users.map(user => {
+        {users.map(user => {
          return <User
             key = {user.id}
             email = {user.email}
             age = {user.age}
           />
-        })} */}
-        Hello sdfsd
-        
+        })}
     </div>
   );
 }
