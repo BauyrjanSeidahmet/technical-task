@@ -39,7 +39,6 @@ export const fetchUser = (id) => {
             const response = await axios.post("/", {
                 query: GET_USER(id)
             });
-            console.log('user', response.data.data.getUser)
             dispatch(fetchUserSuccess(response.data.data.getUser));
         } catch(error) {
             if (error.response && error.response.data) {
@@ -51,8 +50,8 @@ export const fetchUser = (id) => {
     }
 }
 
-const createUserSuccess = user => {
-    return {type: CREATE_USER_SUCCESS, user}
+const createUserSuccess = () => {
+    return {type: CREATE_USER_SUCCESS }
 }
 const createUserFailure = error => {
     return {type: CREATE_USER_FAILURE, error};
@@ -61,7 +60,7 @@ const createUserFailure = error => {
 export const createUser = (userData, navigate) => {
     return async dispatch => {
         try {
-            await axios.post("/", {
+            await axios.post('/', {
                 query: CREATE_USER(userData)
             })
             dispatch(createUserSuccess())
@@ -92,7 +91,7 @@ export const loginUser = (userData, navigate) => {
             dispatch(loginUserSuccess(response.data.data.login))
             navigate('/')
         } catch(error) {
-            dispatch(loginUserFailure(error))
+            dispatch(loginUserFailure(error.response.data.errors[0].message))
         }
     }
 }

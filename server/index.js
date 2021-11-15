@@ -26,14 +26,14 @@ const root = {
         }
     },
     createUser: async({input}) => {  
-        const user = new User({
-            ...input
-        })
         try {
-            await user.save()
-            return user
+            const newUser = new User({
+                ...input
+            })
+            await newUser.save()
+            return newUser
           } catch(err) {
-            console.log(err)
+            throw new Error(err)
           }
     },
     login: async({email, password}) => {

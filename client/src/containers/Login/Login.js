@@ -46,7 +46,7 @@ const Login = () => {
                 className={classes.alert}
             >
                 <AlertTitle>Error</AlertTitle>
-                {error.response.data.error}
+                {error}
             </Alert>}
             <FormElement
                 name="email"
