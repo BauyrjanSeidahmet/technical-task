@@ -48,6 +48,7 @@ const Register = () => {
                 error={getFieldError("email")}
                 label="Email"
                 type="email"
+                required
             />
             <FormElement
                 name="password"
@@ -56,6 +57,7 @@ const Register = () => {
                 error={getFieldError("password")}
                 label="Password"
                 type="password"
+                required
             />
                <FormElement
                 name="age"
@@ -64,6 +66,7 @@ const Register = () => {
                 error={getFieldError("age")}
                 label="Your Age"
                 type="text"
+                required
             />
         </UserForm>
     );
