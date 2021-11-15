@@ -1,0 +1,31 @@
+.wholePage {
+    max-width: 1000px;
+    margin: 20px auto;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .LayoutContent {
+    margin-top: 20px;
+  }
+  
+  .logo {
+    font-size: 32px;
+    text-decoration: none;
+  }
+  
+  .menuLink {
+    margin-left: 20px;
+    margin-right: 20px;
+    text-decoration: none;
+    font-size: 20px;
+  }
+  
+  .logoutBtn {
+    cursor: pointer;
+  }
+  

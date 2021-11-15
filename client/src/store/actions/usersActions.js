@@ -47,10 +47,10 @@ export const loginUser = userData => {
     };
 };
 
-// export const logoutUser = () => {
-//     return async dispatch => {
-//       await axios.delete("/users/sessions");
-//       dispatch({type: LOGOUT_USER});
-//       dispatch(push("/login"));
-//     };
-//   };
+export const logoutUser = () => {
+    return async dispatch => {
+      await axios.delete("/users/sessions");
+      dispatch({type: LOGOUT_USER});
+      dispatch(push("/login"));
+    };
+  };
