@@ -21,7 +21,6 @@ const Layout = props => {
                         user ?
                         <>
                             <span>Hello, {user.email}</span>
-                            <span className='logoutBtn' onClick={logout}>Logout</span>
                         </>
                         :
                         <div>
