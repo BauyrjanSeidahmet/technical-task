@@ -6,18 +6,11 @@ import Login from './containers/Login/Login';
 import Main from './containers/Main/Main';
 import Register from './containers/Register/Register';
 
-const ProtectedRoute = ({isAllowed, redirectTo, ...props}) => {
-  return isAllowed ?
-      <Route {...props} /> :
-      <Navigate to={redirectTo}/>
-};
-
 
 function App() {
-  const user = useSelector(state => state.users.user);
 
   const PrivateRoute = () => {
-
+    const user = useSelector(state => state.users.user);
     return user ? <Outlet /> : <Navigate to="/login" />;
   }
 

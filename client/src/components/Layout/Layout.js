@@ -21,7 +21,6 @@ const Layout = props => {
                         user ?
                         <>
                             <span>Hello, {user.email}</span>
-                            <NavLink className='menuLink' to='/add'>Add new item</NavLink>
                             <span className='logoutBtn' onClick={logout}>Logout</span>
                         </>
                         :
