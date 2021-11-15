@@ -1,13 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import User from '../../components/User/User';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers } from '../../store/actions/usersActions';
+import { fetchUser, fetchUsers } from '../../store/actions/usersActions';
 import FullWidthTextField from '../../components/InputItem/InputItem';
 import { Button } from '@material-ui/core';
 import './Main.css';
 
 const Main = () => {
-  const users = useSelector(state => state.users.users);
+  const [userId, setUserId] = useState(null);
+  const searchedUser = useSelector(state => state.users.searchedUser);
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -15,8 +16,12 @@ const Main = () => {
   }, [])
 
   const OnChangeInput = (e) => {
-    console.log('value', e.target.value)
+    setUserId(e.target.value)
 }
+
+  const OnClickBtn = () => {
+    dispatch(fetchUser(userId))
+  }
 
   return (
     <div className="Main">
@@ -24,17 +29,18 @@ const Main = () => {
         <FullWidthTextField
           OnChangeInput={OnChangeInput}
         />
-      <Button className="btn" variant="contained">Search</Button>
+      <Button className="btn" variant="contained" onClick={OnClickBtn}>Search</Button>
       </div>
-      <div>
-        {users?.map(user => {
-          return <User
-              key = {user.id}
-              email = {user.email}
-              age = {user.age}
-            />
-          })}
-      </div>
+      {
+        searchedUser ? 
+        <User
+        key = {searchedUser?.id}
+        email = {searchedUser?.email}
+        age = {searchedUser?.age}
+      />
+      : 
+      null
+      }
     </div>
   );
 }

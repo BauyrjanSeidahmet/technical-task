@@ -1,7 +1,7 @@
 import axios from "../../axiosApi";
 import {push} from "connected-react-router";
-import { CREATE_USER_FAILURE, CREATE_USER_SUCCESS, LOGIN_USER_SUCCESS, LOGIN_USER_FAILURE, LOGOUT_USER, FETCH_USERS_SUCCESS, FETCH_USERS_FAILURE } from "../actionTypes";
-import { CREATE_USER, GET_USERS_QUERY, LOGIN_USER } from "../../constants";
+import { CREATE_USER_FAILURE, CREATE_USER_SUCCESS, LOGIN_USER_SUCCESS, LOGIN_USER_FAILURE, LOGOUT_USER, FETCH_USERS_SUCCESS, FETCH_USERS_FAILURE, FETCH_USER_SUCCESS, FETCH_USER_FAILURE } from "../actionTypes";
+import { CREATE_USER, GET_USER, GET_USERS_QUERY, LOGIN_USER } from "../../constants";
 
 const fetchUsersSuccess = users => {
     return {type: FETCH_USERS_SUCCESS, users};
@@ -23,6 +23,32 @@ export const fetchUsers = () => {
                 dispatch(fetchUsersFailure(error.response.data));
             } else {
                 dispatch(fetchUsersFailure(error));
+            }
+        }
+    };
+};
+
+const fetchUserSuccess = searchedUser => {
+    return {type: FETCH_USER_SUCCESS, searchedUser};
+};
+const fetchUserFailure = error => {
+    return {type: FETCH_USER_FAILURE, error};
+};
+
+export const fetchUser = (id) => {
+    return async dispatch => {
+        try {
+            const response = await axios.post("/", {
+                query: GET_USER(id)
+            });
+            console.log('user', response.data.data.getUser)
+            dispatch(fetchUserSuccess(response.data.data.getUser));
+            dispatch(push("/"));
+        } catch(error) {
+            if (error.response && error.response.data) {
+                dispatch(fetchUserFailure(error.response.data));
+            } else {
+                dispatch(fetchUserFailure(error));
             }
         }
     };

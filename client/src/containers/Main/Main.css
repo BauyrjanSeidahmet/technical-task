@@ -1,3 +1,7 @@
+.Main {
+    margin-top: 50px;
+}
+
 .search {
     display: flex;
     align-items: center;
@@ -5,5 +9,5 @@
 }
 
 .btn {
-    margin-left: 20px;
+    margin-left: 30px;
 }

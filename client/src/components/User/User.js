@@ -1,10 +1,15 @@
 import React from 'react'
+import './User.css'
 
 const User = ({email, age}) => {
     return (
-        <div>
-            <p>{email}</p>
-            <span>{age}</span>
+        <div className='User'>
+            <div className='infoBlock'>
+                <span className='infoName'>Email:</span> <span>{email}</span>
+            </div>
+            <div className='infoBlock'>
+                <span className='infoName'>Age:</span> <span>{age}</span>
+            </div>
         </div>
     )
 }

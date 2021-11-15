@@ -6,6 +6,16 @@ export const GET_USERS_QUERY = `
     }
 `
 
+export const GET_USER = (id) => {
+    return `
+        query {
+            getUser(id: "${id}") {
+            id, email, age
+            }
+        }
+    `
+}
+
 export const CREATE_USER = ({email, password, age}) => {
     return `
         mutation {
