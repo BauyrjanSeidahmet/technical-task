@@ -1,5 +1,6 @@
 import React from 'react';
 import {Routes, Route} from "react-router-dom";
+import Login from './containers/Login/Login';
 import Main from './containers/Main/Main';
 import Register from './containers/Register/Register';
 
@@ -15,15 +16,14 @@ function App() {
         <Routes>
             <Route path='/' element={<Main/>}/>
             <Route exact path='/register' element={<Register/>}/>
-                  {/* <Route exact path='/register' render={() => <Register/>}/>
-                  <Route exact path='/login' render={() => <Login/>}/>               
-                  <ProtectedRoute
+            <Route exact path='/login' element={<Login/>}/>               
+                  {/* <ProtectedRoute
                         isAllowed={user}
                         redirectTo={"/login"}
                         path="/add"
                         exact
                         component={AddProduct}
-                  />       */}
+                  />     */}
         </Routes>
   );
 }

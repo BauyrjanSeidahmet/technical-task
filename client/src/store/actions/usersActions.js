@@ -28,24 +28,24 @@ export const createUser = userData => {
     };
 };
 
-// const loginUserSuccess = user => {
-//     return {type: LOGIN_USER_SUCCESS, user};
-// };
-// const loginUserFailure = error => {
-//     return {type: LOGIN_USER_FAILURE, error};
-// };
+const loginUserSuccess = user => {
+    return {type: LOGIN_USER_SUCCESS, user};
+};
+const loginUserFailure = error => {
+    return {type: LOGIN_USER_FAILURE, error};
+};
 
-// export const loginUser = userData => {
-//     return async dispatch => {
-//         try {
-//             const response = await axios.post("/users/sessions", userData);
-//             dispatch(loginUserSuccess(response.data))
-//             dispatch(push("/"));
-//         } catch(error) {
-//             dispatch(loginUserFailure(error));
-//         }
-//     };
-// };
+export const loginUser = userData => {
+    return async dispatch => {
+        try {
+            const response = await axios.post("/users/sessions", userData);
+            dispatch(loginUserSuccess(response.data))
+            dispatch(push("/"));
+        } catch(error) {
+            dispatch(loginUserFailure(error));
+        }
+    };
+};
 
 // export const logoutUser = () => {
 //     return async dispatch => {
