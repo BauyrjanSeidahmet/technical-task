@@ -28,24 +28,16 @@ const Register = () => {
         await dispatch(createUser({...state}, navigate));
     };
 
-    const getFieldError = fieldName => {
-        try {
-            return error.errors[fieldName].message;
-        } catch(e) {
-            return undefined;
-        }
-    };
-
     return (
         <UserForm
             onSubmit={submitFormHandler}
             title="Sign Up"
+            error={error}
         >
             <FormElement
                 name="email"
                 value={state.email}
                 onChange={inputChangeHandler}
-                error={getFieldError("email")}
                 label="Email"
                 type="email"
                 required
@@ -54,7 +46,6 @@ const Register = () => {
                 name="password"
                 value={state.password}
                 onChange={inputChangeHandler}
-                error={getFieldError("password")}
                 label="Password"
                 type="password"
                 required
@@ -63,7 +54,6 @@ const Register = () => {
                 name="age"
                 value={state.age}
                 onChange={inputChangeHandler}
-                error={getFieldError("age")}
                 label="Your Age"
                 type="text"
                 required

@@ -60,17 +60,17 @@ const createUserFailure = error => {
 export const createUser = (userData, navigate) => {
     return async dispatch => {
         try {
-            await axios.post('/', {
+            const response = await axios.post('/', {
                 query: CREATE_USER(userData)
             })
+            if (response.data.errors) {
+                dispatch(createUserFailure(response.data.errors[0].message))
+                return 
+            }
             dispatch(createUserSuccess())
             navigate('/login')
         } catch(error) {
-            if (error.response && error.response.data) {
-                dispatch(createUserFailure(error.response.data))
-            } else {
-                dispatch(createUserFailure(error))
-            }
+            dispatch(createUserFailure(error.response.data.errors[0].message))
         }
     }
 }

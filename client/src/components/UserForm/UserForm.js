@@ -7,6 +7,8 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import {makeStyles} from "@material-ui/core/styles";
+import {Alert, AlertTitle} from "@material-ui/lab";
+
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -26,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
+    alert: {
+        width: '100%',
+    },
 }));
 
 const UserForm = (props) => {
@@ -42,6 +47,13 @@ const UserForm = (props) => {
                 <Typography component="h1" variant="h5">
                     {props.title}
                 </Typography>
+                {props.error && <Alert
+                severity="error"
+                className={classes.alert}
+                >
+                <AlertTitle>Error</AlertTitle>
+                     {props.error}
+                 </Alert>}
                 <form className={classes.form} onSubmit={props.onSubmit}>
                     <Grid container spacing={2}>
                         {props.children}

@@ -3,19 +3,9 @@ import {useSelector, useDispatch} from "react-redux";
 import {loginUser} from "../../store/actions/usersActions";
 import FormElement from "../../components/UI/Form/FormElement/FormElement";
 import UserForm from "../../components/UserForm/UserForm";
-import {Alert, AlertTitle} from "@material-ui/lab";
-import {makeStyles} from "@material-ui/core/styles";
 import {useNavigate} from 'react-router-dom';
 
-const useStyles = makeStyles(() => ({
-    alert: {
-        width: '100%',
-    },
-}));
-
-
 const Login = () => {
-    const classes = useStyles()
     const dispatch = useDispatch();
     const error = useSelector(state => state.users.loginError);
     const navigate = useNavigate();
@@ -40,14 +30,8 @@ const Login = () => {
         <UserForm
             onSubmit={submitFormHandler}
             title="Sign In"
+            error={error}
         >
-            {error && <Alert
-                severity="error"
-                className={classes.alert}
-            >
-                <AlertTitle>Error</AlertTitle>
-                {error}
-            </Alert>}
             <FormElement
                 name="email"
                 value={state.email}
